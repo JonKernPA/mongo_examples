@@ -50,7 +50,6 @@ describe Event do
     # Another way to check
     evt = Event.find_by_title("Code Retreat Timbuktoo")
     evt.should_not be_nil
-    puts evt.inspect
     evt.attendees.should include(@fred.id, @harry.id)
   end
   
