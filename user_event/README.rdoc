@@ -1,0 +1,6 @@
+= Simple Demo
+
+Events are created by a user (aka, an author)
+Users can 
+* register for an event, or
+* indicate interest (a maybe?)
