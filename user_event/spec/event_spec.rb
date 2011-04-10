@@ -61,11 +61,17 @@ describe Event do
     }.to change {@event.interested.size}.by(2)    
   end
 
-  it "should not add interested user more than once" do
+  it "should not add an interested user more than once" do
     expect {
       @event.interested_in(@jared)
       @event.interested_in(@sally)
     }.to change {@event.interested.size}.by(0)    
+  end
+  
+  it "should allow 'likes'" do
+    expect {
+      @event_2.likes << @martha
+    }.to change {@event_2.likes.size}.by(1)
   end
   
   after :all do

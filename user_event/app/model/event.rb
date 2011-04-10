@@ -1,14 +1,18 @@
 class Event
   include MongoMapper::Document
 
-  key :title
+  key :title, :required => true
+
   key :user_id
   belongs_to :user
   
+  # One way to do it...
   key :attendees, Set
   key :interested, Set
-  # ensure_index :attendees
-  # ensure_index :interested
+  
+  # Another way to do it...
+  key :like_ids, Array
+  many :likes, :class_name => 'User', :in => :like_ids
   
   def attending(a_user)
     # self.push_uniq(:attendees => a_user.id)
@@ -22,7 +26,11 @@ class Event
   end
   
   def to_s
-    text = "#{title} -- by #{user.name}"
+    text = "\n"
+    text += "-"* 50
+    text += "\n#{title} -- by #{user.name}"
+    text += "\n%12s %12s %8s" % ["Attendees", "Interested", "Likes"]
+    text += "\n%8s %12s %10s" % [attendees.size, interested.size, likes.size]
     if attendees.size > 0
       text += "\n  ATTENDEES:"
       attendees.each {|id| text += "\n  -#{User.find(id).name}"}

@@ -1,6 +1,7 @@
 class User
   include MongoMapper::Document
 
-  key :name
+  key :name, :required => true
+  
   many :events
 end
