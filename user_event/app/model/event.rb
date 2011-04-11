@@ -25,12 +25,16 @@ class Event
     save
   end
   
+  def to_summary
+    text = "%s #: %d, Int: %d Likes: %d" % [title, attendees.size, interested.size, likes.size]
+  end
+  
   def to_s
     text = "\n"
     text += "-"* 50
     text += "\n#{title} -- by #{user.name}"
     text += "\n%12s %12s %8s" % ["Attendees", "Interested", "Likes"]
-    text += "\n%8s %12s %10s" % [attendees.size, interested.size, likes.size]
+    text += "\n%8d %12d %10d" % [attendees.size, interested.size, likes.size]
     if attendees.size > 0
       text += "\n  ATTENDEES:"
       attendees.each {|id| text += "\n  -#{User.find(id).name}"}
