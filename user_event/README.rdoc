@@ -6,7 +6,7 @@ Users can
 * indicate interest (a maybe?)
 == The Model
 
-![User-Event UML Model](user_event_model.png)
+![User-Event UML Model](https://github.com/JonKernPA/mongo_examples/blob/master/user_event/user_event_model.png)
 
 
 == Tests
