@@ -1,15 +1,15 @@
-= Simple Demo
+# Simple Demo
 
 Events are created by a user (aka, an author)
-Users can 
+Users can: 
 * register for an event, or
 * indicate interest (a maybe?)
-== The Model
 
-![User-Event](https://github.com/JonKernPA/mongo_examples/blob/master/user_event/user_event_model.png)
+## The Model
 
+![User-Event](https://github.com/JonKernPA/mongo_examples/blob/master/user_event/user_event_model.png "from UMLet tool")
 
-== Tests
+## Tests
 
 If you run the tests as follows:
 	jonsmac2-2:user_event jon$ spec spec/
