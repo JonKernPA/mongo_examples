@@ -73,11 +73,8 @@ describe Event do
     }.to change {@event_2.likes.size}.by(1)
   end
   
-  # it "should provide like count for a user" do
-    # Event.like_count(@)
-  # end
-  
   after :all do
+    puts "EVENTS"
     events = Event.all
     events.each {|e| puts e}
     puts "USERS"
