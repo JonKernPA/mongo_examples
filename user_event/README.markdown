@@ -8,7 +8,6 @@ Users can:
 ## The Model
 
 ![UserEvent](https://github.com/JonKernPA/mongo_examples/raw/master/user_event/user_event_model.png "from UMLet tool")
-![panda!](https://github.com/tekkub/failpanda/raw/master/failure_panda.jpg)
 
 ## Tests
 
