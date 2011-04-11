@@ -26,10 +26,10 @@ class User
     text = "\n" + "- "*25
     text += "\n#{name.upcase}"
     if events.size > 0
-      text += "\nYOUR EVENTS:"
-      events.each {|e| text += "\n  #{e.to_summary}"}
+      text += "\n  YOUR EVENTS:"
+      events.each {|e| text += "\n    #{e.to_summary}"}
     else
-      text += "\n  You have no events. Click *here* to get started!"
+      text += "\n    You have no events. Click *here* to get started!"
     end
     text += "\n  You like #{likes.count} events" if likes.count > 0
     text += "\n  You are attending #{attending.count} events" if attending.count > 0

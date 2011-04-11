@@ -57,12 +57,10 @@ describe User do
   end
 
   after :all do
-    puts "EVENTS"
-    events = Event.all
-    events.each {|e| puts e}
-    puts "USERS"
-    users = User.all(:order => 'name')
-    users.each {|u| puts "#{u.id} #{u}"}
+    puts "\n\nEVENTS"
+    events = Event.all(:order => 'title').each {|e| puts e}
+    puts "\n\nUSERS"
+    User.all(:order => 'name').each {|u| puts "#{u}"}
   end
   
 end
