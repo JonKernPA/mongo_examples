@@ -57,11 +57,9 @@ describe User do
   end
 
   after :all do
-    events = Event.all
-    events.each {|e| puts e.inspect}
     puts "EVENTS"
     events = Event.all
-    # events.each {|e| puts e}
+    events.each {|e| puts e}
     puts "USERS"
     users = User.all(:order => 'name')
     users.each {|u| puts "#{u.id} #{u}"}
