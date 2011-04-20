@@ -1,7 +1,11 @@
+require 'rubygems'
+require 'mongo_mapper'
+
 class Event
   include MongoMapper::Document
 
   key :title, :required => true
+  key :date, Time, :default => Time.now
 
   key :user_id
   belongs_to :user
