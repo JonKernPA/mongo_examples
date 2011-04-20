@@ -30,7 +30,7 @@ class Event
   end
   
   def to_summary
-    text = "%s %s #: %d, Int: %d Likes: %d" % [date.strftime("%d %b %Y"), title, attendees.size, interested.size, likes.size]
+    text = "%s %s (%s) #: %d, Int: %d Likes: %d" % [date.strftime("%d %b %Y"), title, user.name, attendees.size, interested.size, likes.size]
   end
   
   def to_s
@@ -55,11 +55,16 @@ class Event
     text
   end
   
-  def self.list_all
+  def self.list_all(a_user=nil)
     response = []
     response << "%s %s %s" % ["*"*10, "LIST OF EVENTS", "*"*10] 
     response << "%6s %15s               %s" % ["Date", "TITLE", "Attendees/Interested/Likes"] 
-    events = Event.all(:order => 'date desc')
+    events = nil
+    if a_user.nil?
+      events = Event.all(:order => 'date desc')
+    else
+      events = Event.where(:user => a_user).all.sort(:date.desc)
+    end
     events.each {|e| response << e.to_summary}
     response
   end

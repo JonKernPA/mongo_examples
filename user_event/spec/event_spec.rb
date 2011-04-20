@@ -7,6 +7,11 @@ require 'user'
 cnx = MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017)
 MongoMapper.database = 'mongo_demos'
 
+def dummy_date
+  secs_in_day = 24*60*60
+  Time.now + (rand(60)*secs_in_day - 30)
+end
+
 describe Event do
   context "basic object creation" do
 
@@ -25,8 +30,13 @@ describe Event do
 
       @event = Event.create(:title => "Code Retreat Timbuktoo", :user => @fred)
       @event_2 = Event.create(:title => "Financial Regulation Made Easy")
+      
+      Event.create(:title => "Code Retreat Cleveland", 
+                   :date => dummy_date, :user => @harry)
+      Event.create(:title => "Code Retreat The Boat", 
+                   :date => dummy_date, :user => @sally)
 
-      Event.count.should == 2
+      Event.count.should == 4
       User.count.should == 5
     end
   
@@ -94,6 +104,15 @@ describe Event do
         date.should <= last
         last = date
       end
+      # Yes, you should not output stuff as part of your tests, but this *is* our UI :-)
+      puts response
+    end
+    it "should show each event for a given user" do
+      a_user = User.find_by_name_or_create("Fred")
+      response = Event.list_all(a_user)
+      response.should_not be_empty
+      response.class.should == Array
+      response.size.should == Event.count(:user => a_user) + 2
       # Yes, you should not output stuff as part of your tests, but this *is* our UI :-)
       puts response
     end

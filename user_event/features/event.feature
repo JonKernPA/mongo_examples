@@ -16,3 +16,9 @@ Scenario: Sort Events by Date
   Given A set of events
   When I display the events
   Then I should see them sorted by latest date first
+
+Scenario: Sort Events by Date per User
+  Given A set of events
+  When I display the events for "Fred"
+  Then I should see them sorted by latest date first
+
