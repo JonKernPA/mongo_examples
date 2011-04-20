@@ -29,26 +29,42 @@ def dummy_word(len=6)
   ('a'..'z').to_a.shuffle[0..len].join.capitalize
 end
 
-Given /^A set of events$/ do
+def dummy_date
   secs_in_day = 24*60*60
+  Time.now + (rand(60)*secs_in_day - 30)
+end
+
+Given /^A set of events$/ do
   fred = User.find_or_create_by_name("fred")
   (1..10).each do 
-    Event.create(:title=>"#{dummy_word} #{dummy_word 3} #{dummy_word 10}", :date => Time.now + rand(60)*secs_in_day, :user => fred)
+    Event.create(:title=>"#{dummy_word} #{dummy_word 3} #{dummy_word 10}", 
+                 :date => dummy_date, 
+                 :user => fred)
   end
   harry = User.find_or_create_by_name("harry")
   (1..10).each do 
-    Event.create(:title=>"#{dummy_word} #{dummy_word 3} #{dummy_word 10}", :date => Time.now + rand(60)*secs_in_day, :user => harry)
+    Event.create(:title=>"#{dummy_word} #{dummy_word 3} #{dummy_word 10}", 
+                 :date => dummy_date, 
+                 :user => harry)
   end
   Event.count.should == 20
 end
 
 When /^I display the events$/ do
   @response = Event.list_all
-  puts @response
 end
 
 Then /^I should see them sorted by latest date first$/ do
-  first = Date.parse(@response.third[0..10])
-  last = Date.parse(@response.last[0..10])
-  first.should > last  
+  last_date = Date.parse(@response.third[0..10])
+  @response[3..@response.size].each do |r|
+    date = Date.parse(r[0..10])
+    date.should <= last_date
+    last_date = date
+  end
+end
+
+When /^I display the events for "([^"]*)"$/ do |user_name|
+  user = User.find_by_name_or_create(user_name)
+  @response = Event.list_all(user)
+  pp @response
 end
