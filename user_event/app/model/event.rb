@@ -30,7 +30,7 @@ class Event
   end
   
   def to_summary
-    text = "%s #: %d, Int: %d Likes: %d" % [title, attendees.size, interested.size, likes.size]
+    text = "%s %s #: %d, Int: %d Likes: %d" % [date.strftime("%d %b %Y"), title, attendees.size, interested.size, likes.size]
   end
   
   def to_s
@@ -53,5 +53,14 @@ class Event
       text += "\n  NO FOLKS INTERESTED YET -- change the event or get out and market this event!"
     end
     text
+  end
+  
+  def self.list_all
+    response = []
+    response << "%s %s %s" % ["*"*10, "LIST OF EVENTS", "*"*10] 
+    response << "%6s %15s               %s" % ["Date", "TITLE", "Attendees/Interested/Likes"] 
+    events = Event.all(:order => 'date desc')
+    events.each {|e| response << e.to_summary}
+    response
   end
 end
