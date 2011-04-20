@@ -88,6 +88,12 @@ describe Event do
       response.should_not be_empty
       response.class.should == Array
       response.size.should == Event.count + 2 #for title and column header
+      last = Date.parse(response[2][0..10])
+      response[3..response.size].each do |r|
+        date = Date.parse(r[0..10])
+        date.should <= last
+        last = date
+      end
       # Yes, you should not output stuff as part of your tests, but this *is* our UI :-)
       puts response
     end
