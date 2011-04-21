@@ -3,6 +3,8 @@ require 'rubygems'
 require 'mongo_mapper'
 require 'event'
 require 'user'
+require 'factories/events.rb'
+require 'factories/users.rb'
 
 cnx = MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017)
 MongoMapper.database = 'mongo_demos'
@@ -21,19 +23,19 @@ describe Event do
       Event.count.should == 0
       User.count.should == 0
     
-      @fred = User.create(:name => "Fred")
+      @fred = Factory(:user, :name => "Fred")
       @fred.should_not be_nil
-      @harry = User.create(:name => "Harry")
-      @sally = User.create(:name => "Sally")
-      @jared = User.create(:name => "Jared")
-      @martha = User.create(:name => "Martha")
+      @harry = Factory(:user, :name => "Harry")
+      @sally = Factory(:user, :name => "Sally")
+      @jared = Factory(:user, :name => "Jared")
+      @martha = Factory(:user, :name => "Martha")
 
-      @event = Event.create(:title => "Code Retreat Timbuktoo", :user => @fred)
-      @event_2 = Event.create(:title => "Financial Regulation Made Easy")
+      @event = Factory(:event, :title => "Code Retreat Timbuktoo", :user => @fred)
+      @event_2 = Factory(:event, :title => "Financial Regulation Made Easy")
       
-      Event.create(:title => "Code Retreat Cleveland", 
+      Factory(:event, :title => "Code Retreat Cleveland", 
                    :date => dummy_date, :user => @harry)
-      Event.create(:title => "Code Retreat The Boat", 
+      Factory(:event, :title => "Code Retreat The Boat", 
                    :date => dummy_date, :user => @sally)
 
       Event.count.should == 4
