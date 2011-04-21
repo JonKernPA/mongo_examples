@@ -1,17 +1,19 @@
 # Simple Demo
 
 Features:
-* Cucumber
-* RSpec
-* Factory Girl
-* MongoMapper
+
+ * Cucumber
+ * RSpec
+ * Factory Girl
+ * MongoMapper
 
 Events are created by a user (aka, an author)
 Users can: 
-* register for an event, or
-* indicate interest (a maybe?)
-* See list of events
-* There is no more (I said it was *small*)
+
+ * register for an event, or
+ * indicate interest (a maybe?)
+ * See list of events
+ * There is no more (I said it was *small*)
 
 ## The Model
 
