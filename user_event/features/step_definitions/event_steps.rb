@@ -34,18 +34,20 @@ def dummy_date
   Time.now + (rand(60)*secs_in_day - 30)
 end
 
+def dummy_title
+  "#{dummy_word} #{dummy_word 3} #{dummy_word 10}"
+end
+
 Given /^A set of events$/ do
   fred = User.find_or_create_by_name("fred")
-  (1..10).each do 
-    Event.create(:title=>"#{dummy_word} #{dummy_word 3} #{dummy_word 10}", 
-                 :date => dummy_date, 
-                 :user => fred)
-  end
   harry = User.find_or_create_by_name("harry")
   (1..10).each do 
-    Event.create(:title=>"#{dummy_word} #{dummy_word 3} #{dummy_word 10}", 
-                 :date => dummy_date, 
-                 :user => harry)
+    evt = Factory(:event, :title => dummy_title, 
+                          :date  => dummy_date, 
+                          :user  => fred)
+    evt = Factory(:event, :title => dummy_title, 
+                          :date  => dummy_date, 
+                          :user  => harry)
   end
   Event.count.should == 20
 end

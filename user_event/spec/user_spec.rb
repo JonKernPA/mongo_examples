@@ -14,17 +14,22 @@ describe User do
     Event.count.should == 0
     User.count.should == 0
     
-    @fred = User.create(:name => "Fred")
+    @fred = Factory(:user, :name => "Fred")
     @fred.should_not be_nil
-    @harry = User.create(:name => "Harry")
-    @sally = User.create(:name => "Sally")
-    @jared = User.create(:name => "Jared")
-    @martha = User.create(:name => "Martha")
+    @harry = Factory(:user, :name => "Harry")
+    @sally = Factory(:user, :name => "Sally")
+    @jared = Factory(:user, :name => "Jared")
+    @martha = Factory(:user, :name => "Martha")
 
-    @event = Event.create(:title => "Code Retreat in Timbuktoo", :user => @fred)
-    @event_2 = Event.create(:title => "Financial Regulation Made Easy", :user => @sally)
+    @event = Factory(:event, :title => "Code Retreat Timbuktoo", :user => @fred)
+    @event_2 = Factory(:event, :title => "Financial Regulation Made Easy")
+    
+    Factory(:event, :title => "Code Retreat Cleveland", 
+                 :date => dummy_date, :user => @harry)
+    Factory(:event, :title => "Code Retreat The Boat", 
+                 :date => dummy_date, :user => @sally)
 
-    Event.count.should == 2
+    Event.count.should == 4
     User.count.should == 5
   end
 
