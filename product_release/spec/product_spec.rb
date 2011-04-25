@@ -34,6 +34,8 @@ describe Product do
     list.size.should == 2
     list = Product.all(:conditions => {"releases.released_at" => {"$lt" => 25.days.ago}})
     list.count.should == 0
+    list = Product.where( :"releases.released_at".lt => 6.days.ago ).map(&:releases).flatten.select { |release| release.released_at < 6.days.ago }
+    list.size.should == 3
   end
   
   after :all do
