@@ -4,5 +4,5 @@ class Release
   key :minor, String, :default => 0
   key :released_at, Time, :default => Time.now
 
-  # embedded_in :product
+  #embedded_in :product
 end
