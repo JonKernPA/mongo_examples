@@ -30,15 +30,16 @@ describe Product do
   end
   
   it "should allow querying by age" do
-    list = Product.all(:conditions => {"releases.released_at" => {"$gt" => 5.days.ago}})
-    puts list.inspect
-    list.should_not be_empty
+    list = Product.all(:conditions => {"releases.released_at" => {"$lt" => 5.days.ago}})
+    list.size.should == 2
+    list = Product.all(:conditions => {"releases.released_at" => {"$lt" => 25.days.ago}})
+    list.count.should == 0
   end
   
   after :all do
     products = Product.sort(:name)
     products.each {|p| puts p}
-    products.each {|p| puts p.to_json}
+    # products.each {|p| puts p.to_json}
   end
   
 end
