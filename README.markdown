@@ -9,11 +9,11 @@ Product have versioned releases.
 
 ## User -- Event
 
-Users can sponsor, like, and attend Events.
+Users can sponsor, like, and attend Events. This project goes along with this [blog post](http://technicaldebt.com/?p=769 "Multiple Many-to-Many Associations in MongoMapper").
+
 * Many-to-Many Associations
 * Cucumber
 * RSpec
-* Goes along with this [blog post](http://technicaldebt.com/?p=769 "Multiple Many-to-Many Associations in MongoMapper")
 
 ## PDF Reader
 
