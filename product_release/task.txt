@@ -1,0 +1,14 @@
+class Task
+  attr_accessor :time
+end
+
+t1=Task.new
+t1.time=10
+t2=Task.new
+t2.time=20
+
+Example Section
+	Current Patient Condition [Critical, Serious, Fair, Good]
+		Onset [Minutes ago, Hours ago, Days ago]
+		Evaluation Date
+	Evaluation Date
