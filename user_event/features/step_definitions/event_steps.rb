@@ -3,7 +3,7 @@ Given /^a clean database$/ do
   Event.destroy_all
 end
 Given /^A User "([^"]*)"$/ do |user_name|
-  user = User.create(:name => user_name)
+  @user = User.create(:name => user_name)
 end
 
 When /^"([^"]*)" creates "([^"]*)" on "([^"]*)"$/ do |user_name, title, date|

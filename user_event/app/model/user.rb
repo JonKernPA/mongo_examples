@@ -9,6 +9,8 @@ class User
   key :dob_ms, Integer
   key :dob_days, Integer
   
+  key :profile, UserProfile
+  
   many :events
   
   # callbacks
