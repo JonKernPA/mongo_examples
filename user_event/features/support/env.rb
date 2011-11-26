@@ -1,7 +1,9 @@
 $LOAD_PATH << File.expand_path('../../../app/model' , __FILE__)
 require 'user_profile'
+require 'group'
 require 'user'
 require 'event'
+require 'tag'
 require 'spec/factories/events.rb'
 require 'spec/factories/users.rb'
 # require 'spec/factories/profile.rb'

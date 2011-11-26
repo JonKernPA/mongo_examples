@@ -12,6 +12,7 @@ class User
   key :profile, UserProfile
   
   many :events
+  belongs_to :group
   
   # callbacks
   after_create :store_dob_in_ms

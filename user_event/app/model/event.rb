@@ -10,14 +10,18 @@ class Event
   key :user_id
   belongs_to :user
   
-  # One way to do it...
+  # One way to do one-to-many association...
   key :attendees, Set
   key :interested, Set
   
-  # Another way to do it...
+  # A way to do many-to-many associations...
   key :like_ids, Array
   many :likes, :class_name => 'User', :in => :like_ids
   
+  # Events can be tagged
+  key :tag_ids, Array
+  many :tags, :in => :tag_ids
+
   def attending(a_user)
     # self.push_uniq(:attendees => a_user.id)
     attendees << a_user.id

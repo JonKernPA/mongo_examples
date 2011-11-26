@@ -1,14 +1,22 @@
 Given /^a clean database$/ do
-  User.destroy_all
-  Event.destroy_all
+  User.collection.remove
+  Event.collection.remove
+  Tag.collection.remove
+  Group.collection.remove
 end
+
 Given /^A User "([^"]*)"$/ do |user_name|
   @user = User.create(:name => user_name)
 end
 
 When /^"([^"]*)" creates "([^"]*)" on "([^"]*)"$/ do |user_name, title, date|
   author = User.find_by_name(user_name)
-  event = Event.create(:user => author, :title => title, :date => date)
+  @event = Event.create(:user => author, :title => title, :date => date)
+end
+
+When /^tags the current event with "([^"]*)"$/ do |tag|
+  tag = Tag.find_or_create_by_name(:name => tag)
+  @event.tags << tag
 end
 
 Then /^We should see the "([^"]*)" event$/ do |title|

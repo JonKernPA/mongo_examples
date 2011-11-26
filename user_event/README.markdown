@@ -1,4 +1,5 @@
 # Simple Demo
+A small example of some common mongomapper techniques.
 
 Features:
 
@@ -22,11 +23,9 @@ Users can:
 ## Tests
 
 If you run the tests as follows:
-	jonsmac2-2:user_event jon$ spec spec/
+	$ spec spec/
 
 You should see output like this:
-	jonsmac2-2:user_event jon$ spec spec/
-	......
 
 	Test: event_spec.rb
 
